@@ -5,9 +5,6 @@ namespace AEATech\TransactionManager\Transaction\Internal;
 
 use InvalidArgumentException;
 
-/**
- * @internal
- */
 class InsertValuesBuilder
 {
     /**

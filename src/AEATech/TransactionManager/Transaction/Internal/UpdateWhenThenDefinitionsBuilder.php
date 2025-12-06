@@ -5,9 +5,6 @@ namespace AEATech\TransactionManager\Transaction\Internal;
 
 use InvalidArgumentException;
 
-/**
- * @internal
- */
 class UpdateWhenThenDefinitionsBuilder
 {
     public const MESSAGE_ROWS_MUST_NOT_BE_EMPTY = 'Rows must not be empty.';
