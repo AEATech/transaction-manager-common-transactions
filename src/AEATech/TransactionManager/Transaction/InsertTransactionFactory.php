@@ -1,0 +1,31 @@
+<?php
+declare(strict_types=1);
+
+namespace AEATech\TransactionManager\Transaction;
+
+use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
+
+class InsertTransactionFactory
+{
+    public function __construct(
+        private readonly InsertValuesBuilder $insertValuesBuilder,
+        private readonly IdentifierQuoterInterface $quoter,
+    ) {
+    }
+
+    public function factory(
+        string $tableName,
+        array $rows,
+        array $columnTypes = [],
+        bool $isIdempotent = false,
+    ): InsertTransaction {
+        return new InsertTransaction(
+            $this->insertValuesBuilder,
+            $this->quoter,
+            $tableName,
+            $rows,
+            $columnTypes,
+            $isIdempotent
+        );
+    }
+}
