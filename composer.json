@@ -1,41 +1,49 @@
 {
-  "name": "aeatech/transaction-manager-common-transactions",
-  "description": "Contains reusable, dialect-independent SQL transaction implementations, identifier quoting abstraction, and shared builders used across MySQL, PostgreSQL, and future AEATech Transaction Manager adapters",
-  "license": "MIT",
-  "config": {
-    "sort-packages": true
-  },
+    "name": "aeatech/transaction-manager-common-transactions",
+    "description": "Contains reusable, dialect-independent SQL transaction implementations, identifier quoting abstraction, and shared builders used across MySQL, PostgreSQL, and future AEATech Transaction Manager adapters",
+    "license": "MIT",
+    "type": "library",
+    "config": {
+        "sort-packages": true
+    },
     "repositories": [
         {
             "type": "vcs",
             "url": "git@github.com:Shahelm/transaction-manager-core.git"
         }
     ],
-  "require": {
-    "php": ">=8.2",
-    "ext-pdo": "*",
-    "aeatech/transaction-manager-core": "^0.1.0"
-  },
-  "require-dev": {
-    "mockery/mockery": "^1.6.10",
-    "phpunit/phpunit": "^11.5",
-    "roave/security-advisories": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "AEATech\\TransactionManager\\Transaction\\": "src/AEATech/TransactionManager/Transaction"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-       "AEATech\\Test\\TransactionManager\\Transaction\\": "tests/AEATech/Test/TransactionManager/Transaction"
-    }
-  },
-  "archive": {
-    "exclude": [
-      "/docker",
-      "/tests",
-      "/phpunit.xml"
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "aeatech/transaction-manager-core": "^0.1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.6.10",
+        "phpunit/phpunit": "^11.5",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "AEATech\\TransactionManager\\Transaction\\": "src/AEATech/TransactionManager/Transaction"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AEATech\\Test\\TransactionManager\\Transaction\\": "tests/AEATech/Test/TransactionManager/Transaction"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "/docker",
+            "/tests",
+            "/phpunit.xml"
+        ]
+    },
+    "keywords": [
+        "transaction",
+        "sql",
+        "upsert",
+        "bulk-update",
+        "aeatech"
     ]
-  }
 }
