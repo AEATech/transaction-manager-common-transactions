@@ -15,7 +15,7 @@
     "require": {
         "php": ">=8.2",
         "ext-pdo": "*",
-        "aeatech/transaction-manager-core": "^0.1.0"
+        "aeatech/transaction-manager-core": "dev-main"
     },
     "require-dev": {
         "mockery/mockery": "^1.6.10",
