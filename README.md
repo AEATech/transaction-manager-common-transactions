@@ -70,7 +70,7 @@ All SQL dialect specifics are delegated to adapter packages.
 ### Start containers
 
 ``` bash
-docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml up -d
+docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml up -d --build
 ```
 
 ### Stop and remove containers
