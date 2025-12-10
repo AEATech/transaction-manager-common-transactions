@@ -11,7 +11,7 @@ identifier quoter is supplied.
 Typical adapters are built on top of this package:
 
 -   `aeatech/transaction-manager-mysql`
--   `aeatech/transaction-manager-pgsql`
+-   `aeatech/transaction-manager-postgresql`
 
 This package **does not** contain any dialect-specific SQL features
 (e.g., `INSERT IGNORE`, `ON DUPLICATE KEY`, `ON CONFLICT`).\
@@ -61,7 +61,7 @@ All SQL dialect specifics are delegated to adapter packages.
     transaction-manager-common-transactions
            ↑
            ├──────── transaction-manager-mysql
-           └──────── transaction-manager-pgsql
+           └──────── transaction-manager-postgresql
 
 ------------------------------------------------------------------------
 
