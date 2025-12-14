@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\Internal\UpdateWhenThenDefinitionsBuilder;
 use AEATech\TransactionManager\Transaction\UpdateWhenThenTransaction;
 use AEATech\TransactionManager\Transaction\UpdateWhenThenTransactionFactory;
@@ -62,6 +63,7 @@ class UpdateWhenThenTransactionFactoryTest extends TestCase
             self::UPDATE_COLUMNS,
             self::UPDATE_COLUMN_TYPES,
             self::IS_IDEMPOTENT,
+            StatementReusePolicy::PerTransaction
         );
 
         $actual = (new UpdateWhenThenTransactionFactory($updateWhenThenDefinitionsBuilder, $quoter))
@@ -73,6 +75,7 @@ class UpdateWhenThenTransactionFactoryTest extends TestCase
                 self::UPDATE_COLUMNS,
                 self::UPDATE_COLUMN_TYPES,
                 self::IS_IDEMPOTENT,
+                StatementReusePolicy::PerTransaction
             );
 
         self::assertEquals($expected, $actual);

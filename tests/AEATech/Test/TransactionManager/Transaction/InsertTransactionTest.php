@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\IdentifierQuoterInterface;
 use AEATech\TransactionManager\Transaction\InsertTransaction;
 use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
@@ -52,7 +53,15 @@ class InsertTransactionTest extends TestCase
                 ['id', 'na`me'],         // columns to be quoted by transaction
             ]);
 
-        $tx = new InsertTransaction($this->insertValuesBuilder, $this->quoter, 'users', $rows, ['id' => 1], true);
+        $tx = new InsertTransaction(
+            $this->insertValuesBuilder,
+            $this->quoter,
+            'users',
+            $rows,
+            ['id' => 1],
+            true,
+            StatementReusePolicy::PerTransaction
+        );
 
         // Act
         $q = $tx->build();
@@ -62,6 +71,7 @@ class InsertTransactionTest extends TestCase
         self::assertSame([1, 'Alex'], $q->params);
         self::assertSame([0 => 1], $q->types);
         self::assertTrue($tx->isIdempotent());
+        self::assertSame(StatementReusePolicy::PerTransaction, $q->statementReusePolicy);
     }
 
     /**

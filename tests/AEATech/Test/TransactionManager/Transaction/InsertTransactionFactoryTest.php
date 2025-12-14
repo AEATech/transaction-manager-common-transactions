@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\InsertTransactionFactory;
 use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
 use Mockery as m;
@@ -51,13 +52,20 @@ class InsertTransactionFactoryTest extends TestCase
                 ['id', 'name'],
             ]);
 
-        $tx = $this->insertTransactionFactory->factory('users', $rows, ['id' => 1]);
+        $tx = $this->insertTransactionFactory->factory(
+            'users',
+            $rows,
+            ['id' => 1],
+            true,
+            StatementReusePolicy::PerTransaction
+        );
 
         $q = $tx->build();
 
         self::assertSame('INSERT INTO `users` (`id`, `name`) VALUES (?, ?)', $q->sql);
         self::assertSame([1, 'Alex'], $q->params);
         self::assertSame([0 => 1], $q->types);
-        self::assertFalse($tx->isIdempotent());
+        self::assertSame(StatementReusePolicy::PerTransaction, $q->statementReusePolicy);
+        self::assertTrue($tx->isIdempotent());
     }
 }

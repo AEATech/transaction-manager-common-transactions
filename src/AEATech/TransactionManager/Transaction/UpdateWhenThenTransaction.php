@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\Internal\UpdateWhenThenDefinitionsBuilder;
 use AEATech\TransactionManager\TransactionInterface;
 
@@ -19,6 +20,7 @@ class UpdateWhenThenTransaction implements TransactionInterface
         private readonly array $updateColumns,
         private readonly array $updateColumnTypes = [],
         private readonly bool $isIdempotent = true,
+        private readonly StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None
     ) {
     }
 
@@ -76,7 +78,7 @@ class UpdateWhenThenTransaction implements TransactionInterface
 
         $types = array_filter($types);
 
-        return new Query($sql, $params, $types);
+        return new Query($sql, $params, $types, $this->statementReusePolicy);
     }
 
     public function isIdempotent(): bool

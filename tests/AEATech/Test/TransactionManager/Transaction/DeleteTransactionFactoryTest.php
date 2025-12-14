@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\DeleteTransaction;
 use AEATech\TransactionManager\Transaction\DeleteTransactionFactory;
 use AEATech\TransactionManager\Transaction\IdentifierQuoterInterface;
@@ -35,7 +36,8 @@ class DeleteTransactionFactoryTest extends TestCase
             self::IDENTIFIER_COLUMN,
             self::IDENTIFIER_COLUMN_TYPE,
             self::IDENTIFIERS,
-            self::IS_IDEMPOTENT
+            self::IS_IDEMPOTENT,
+            StatementReusePolicy::PerTransaction
         );
 
         $actual = (new DeleteTransactionFactory($quoter))->factory(
@@ -43,7 +45,8 @@ class DeleteTransactionFactoryTest extends TestCase
             self::IDENTIFIER_COLUMN,
             self::IDENTIFIER_COLUMN_TYPE,
             self::IDENTIFIERS,
-            self::IS_IDEMPOTENT
+            self::IS_IDEMPOTENT,
+            StatementReusePolicy::PerTransaction
         );
 
         self::assertEquals($expected, $actual);

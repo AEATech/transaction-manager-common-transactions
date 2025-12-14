@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\TransactionInterface;
 use InvalidArgumentException;
 
@@ -22,6 +23,7 @@ class UpdateTransaction implements TransactionInterface
         private readonly array $columnsWithValuesForUpdate,
         private readonly array $columnTypes = [], # Doctrine/DBAL type or PDO::PARAM_*
         private readonly bool $isIdempotent = true,
+        private readonly StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None,
     ) {
     }
 
@@ -72,7 +74,7 @@ class UpdateTransaction implements TransactionInterface
             implode(', ', $placeholders),
         );
 
-        return new Query($sql, $params, $types);
+        return new Query($sql, $params, $types, $this->statementReusePolicy);
     }
 
     public function isIdempotent(): bool

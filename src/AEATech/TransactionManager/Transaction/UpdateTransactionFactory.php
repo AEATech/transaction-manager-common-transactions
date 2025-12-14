@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AEATech\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
+
 class UpdateTransactionFactory
 {
     public function __construct(
@@ -18,6 +20,7 @@ class UpdateTransactionFactory
         array $columnsWithValuesForUpdate,
         array $columnTypes = [],
         bool $isIdempotent = true,
+        StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None,
     ): UpdateTransaction {
         return new UpdateTransaction(
             $this->quoter,
@@ -28,6 +31,7 @@ class UpdateTransactionFactory
             $columnsWithValuesForUpdate,
             $columnTypes,
             $isIdempotent,
+            $statementReusePolicy
         );
     }
 }

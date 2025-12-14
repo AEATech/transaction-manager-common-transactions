@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
 
 class InsertTransactionFactory
@@ -18,6 +19,7 @@ class InsertTransactionFactory
         array $rows,
         array $columnTypes = [],
         bool $isIdempotent = false,
+        StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None,
     ): InsertTransaction {
         return new InsertTransaction(
             $this->insertValuesBuilder,
@@ -25,7 +27,8 @@ class InsertTransactionFactory
             $tableName,
             $rows,
             $columnTypes,
-            $isIdempotent
+            $isIdempotent,
+            $statementReusePolicy
         );
     }
 }

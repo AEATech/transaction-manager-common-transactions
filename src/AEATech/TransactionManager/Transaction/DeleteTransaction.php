@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\TransactionInterface;
 use InvalidArgumentException;
 
@@ -18,6 +19,7 @@ class DeleteTransaction implements TransactionInterface
         private readonly mixed $identifierColumnType, # Doctrine/DBAL type or PDO::PARAM_*
         private readonly array $identifiers,
         private readonly bool $isIdempotent = true,
+        private readonly StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None,
     ) {
     }
 
@@ -40,7 +42,7 @@ class DeleteTransaction implements TransactionInterface
             implode(', ', $placeholders),
         );
 
-        return new Query($sql, $params, $types);
+        return new Query($sql, $params, $types, $this->statementReusePolicy);
     }
 
     public function isIdempotent(): bool

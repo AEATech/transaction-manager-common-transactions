@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\Test\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\DeleteTransaction;
 use AEATech\TransactionManager\Transaction\IdentifierQuoterInterface;
 use InvalidArgumentException;
@@ -39,12 +40,16 @@ class DeleteTransactionTest extends TestCase
             100503 => 3,
         ];
 
+        $statementReusePolicy = StatementReusePolicy::PerTransaction;
+
         $transaction = new DeleteTransaction(
             $this->quoter,
             'test_table',
             'id',
             PDO::PARAM_INT,
-            $identifiers
+            $identifiers,
+            true,
+            $statementReusePolicy
         );
 
         $expectedParams = [];
@@ -56,7 +61,7 @@ class DeleteTransactionTest extends TestCase
 
         $expectedSql = 'DELETE FROM `test_table` WHERE `id` IN (?, ?, ?)';
 
-        $expectedQuery = new Query($expectedSql, $expectedParams, $expectedTypes);
+        $expectedQuery = new Query($expectedSql, $expectedParams, $expectedTypes, $statementReusePolicy);
 
         /** @noinspection PhpUnhandledExceptionInspection */
         $actualQuery = $transaction->build();

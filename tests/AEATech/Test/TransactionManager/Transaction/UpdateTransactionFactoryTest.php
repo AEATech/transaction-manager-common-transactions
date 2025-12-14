@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\UpdateTransaction;
 use AEATech\TransactionManager\Transaction\UpdateTransactionFactory;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -48,6 +49,7 @@ class UpdateTransactionFactoryTest extends TestCase
             self::COLUMNS_WITH_VALUES_FOR_UPDATE,
             self::COLUMN_TYPES,
             self::IS_IDEMPOTENT,
+            StatementReusePolicy::PerTransaction
         );
 
         $actual = (new UpdateTransactionFactory($quoter))->factory(
@@ -58,6 +60,7 @@ class UpdateTransactionFactoryTest extends TestCase
             self::COLUMNS_WITH_VALUES_FOR_UPDATE,
             self::COLUMN_TYPES,
             self::IS_IDEMPOTENT,
+            StatementReusePolicy::PerTransaction
         );
 
         self::assertEquals($expected, $actual);

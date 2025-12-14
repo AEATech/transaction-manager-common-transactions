@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\Test\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\IdentifierQuoterInterface;
 use AEATech\TransactionManager\Transaction\Internal\UpdateWhenThenDefinitionsBuilder;
 use AEATech\TransactionManager\Transaction\UpdateWhenThenTransaction;
@@ -139,7 +140,12 @@ class UpdateWhenThenTransactionTest extends TestCase
         // append identifiers types
         $expectedTypes += array_fill($typesIndex, count(self::ROWS), PDO::PARAM_INT);
 
-        $expected = new Query(self::EXPECTED_SQL, self::EXPECTED_PARAMS, $expectedTypes);
+        $expected = new Query(
+            self::EXPECTED_SQL,
+            self::EXPECTED_PARAMS,
+            $expectedTypes,
+            StatementReusePolicy::PerTransaction
+        );
 
         $transaction = $this->createTransaction(
             updateColumnTypes: $updateColumnTypes
@@ -206,7 +212,8 @@ class UpdateWhenThenTransactionTest extends TestCase
             self::IDENTIFIER_COLUMN_TYPE,
             self::UPDATE_COLUMNS,
             $updateColumnTypes,
-            $isIdempotent
+            $isIdempotent,
+            StatementReusePolicy::PerTransaction
         );
     }
 }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AEATech\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
+
 class DeleteTransactionFactory
 {
     public function __construct(
@@ -16,6 +18,7 @@ class DeleteTransactionFactory
         mixed $identifierColumnType, # Doctrine/DBAL type or PDO::PARAM_*
         array $identifiers,
         bool $isIdempotent = true,
+        StatementReusePolicy $statementReusePolicy = StatementReusePolicy::None,
     ): DeleteTransaction {
         return new DeleteTransaction(
             $this->quoter,
@@ -23,7 +26,8 @@ class DeleteTransactionFactory
             $identifierColumn,
             $identifierColumnType,
             $identifiers,
-            $isIdempotent
+            $isIdempotent,
+            $statementReusePolicy
         );
     }
 }

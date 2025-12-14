@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AEATech\Test\TransactionManager\Transaction;
 
 use AEATech\TransactionManager\Query;
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\UpdateTransaction;
 use InvalidArgumentException;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -62,7 +63,12 @@ class UpdateTransactionTest extends TestCase
 
         $expectedTypes = array_filter($expectedTypes);
 
-        $expectedQuery = new Query(self::EXPECTED_SQL, $expectedParams, $expectedTypes);
+        $expectedQuery = new Query(
+            self::EXPECTED_SQL,
+            $expectedParams,
+            $expectedTypes,
+            StatementReusePolicy::PerTransaction
+        );
 
         /** @noinspection PhpUnhandledExceptionInspection */
         $actualQuery = $transaction->build();
@@ -148,7 +154,8 @@ class UpdateTransactionTest extends TestCase
             $identifiers,
             $columnsWithValuesForUpdate,
             $columnTypes,
-            $isIdempotent
+            $isIdempotent,
+            StatementReusePolicy::PerTransaction
         );
     }
 }

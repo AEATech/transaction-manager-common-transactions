@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AEATech\Test\TransactionManager\Transaction;
 
+use AEATech\TransactionManager\StatementReusePolicy;
 use AEATech\TransactionManager\Transaction\SqlTransaction;
 use PDO;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -27,7 +28,13 @@ class SqlTransactionTest extends TestCase
     {
         parent::setUp();
 
-        $this->transaction = new SqlTransaction(self::SQL, self::PARAMS, self::PARAM_TYPES);
+        $this->transaction = new SqlTransaction(
+            self::SQL,
+            self::PARAMS,
+            self::PARAM_TYPES,
+            false,
+            StatementReusePolicy::PerTransaction
+        );
     }
 
     /**
@@ -36,7 +43,7 @@ class SqlTransactionTest extends TestCase
     #[Test]
     public function build(): void
     {
-        $expected = [self::SQL, self::PARAMS, self::PARAM_TYPES];
+        $expected = [self::SQL, self::PARAMS, self::PARAM_TYPES, false, StatementReusePolicy::PerTransaction];
 
         $query = $this->transaction->build();
 
@@ -46,6 +53,8 @@ class SqlTransactionTest extends TestCase
                 $query->sql,
                 $query->params,
                 $query->types,
+                $this->transaction->isIdempotent(),
+                $query->statementReusePolicy,
             ]
         );
     }
