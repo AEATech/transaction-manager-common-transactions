@@ -21,6 +21,7 @@ class InsertTransaction implements TransactionInterface
      *        ]
      * @param array<string, int|string> $columnTypes Doctrine/DBAL type or PDO::PARAM_*
      * @param bool $isIdempotent
+     * @param StatementReusePolicy $statementReusePolicy
      */
     public function __construct(
         private readonly InsertValuesBuilder $insertValuesBuilder,
