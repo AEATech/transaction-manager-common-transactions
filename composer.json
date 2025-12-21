@@ -1,6 +1,7 @@
 {
     "name": "aeatech/transaction-manager-common-transactions",
     "description": "Contains reusable, dialect-independent SQL transaction implementations, identifier quoting abstraction, and shared builders used across MySQL, PostgreSQL, and future AEATech Transaction Manager adapters",
+    "keywords": ["transaction-manager", "transaction", "database", "MySQL", "PostgreSQL"],
     "license": "MIT",
     "type": "library",
     "config": {
@@ -38,12 +39,5 @@
             "/tests",
             "/phpunit.xml"
         ]
-    },
-    "keywords": [
-        "transaction",
-        "sql",
-        "upsert",
-        "bulk-update",
-        "aeatech"
-    ]
+    }
 }
