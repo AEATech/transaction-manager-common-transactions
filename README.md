@@ -162,12 +162,6 @@ $transaction = new InsertTransaction(
 
 ------------------------------------------------------------------------
 
-## 📄 License
+## License
 
-MIT License. See [LICENSE](./LICENSE) for details.
-
-------------------------------------------------------------------------
-
-## 🤝 Contributing
-
-PRs and feedback are welcome!
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
