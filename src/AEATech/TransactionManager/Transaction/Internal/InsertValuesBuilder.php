@@ -8,9 +8,9 @@ use InvalidArgumentException;
 class InsertValuesBuilder
 {
     /**
-     * @param array<array<string,mixed>> $rows
+     * @param array<array<string, mixed>> $rows
      *
-     * @param array<string|int, mixed> $columnTypes
+     * @param array<string, mixed> $columnTypes
      *
      * @return array{
      *     0: string,           // VALUES (...), (...), ...

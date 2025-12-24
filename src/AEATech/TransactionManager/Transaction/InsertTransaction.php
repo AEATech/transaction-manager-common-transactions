@@ -19,7 +19,7 @@ class InsertTransaction implements TransactionInterface
      *            ['name' => 'Alex', 'age' => 30],
      *            ['name' => 'Bob', 'age' => 25],
      *        ]
-     * @param array<string, int|string> $columnTypes Doctrine/DBAL type or PDO::PARAM_*
+     * @param array<string, mixed> $columnTypes Doctrine/DBAL type or PDO::PARAM_*
      * @param bool $isIdempotent
      * @param StatementReusePolicy $statementReusePolicy
      */

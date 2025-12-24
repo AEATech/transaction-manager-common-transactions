@@ -11,7 +11,7 @@ class SqlTransaction implements TransactionInterface
 {
     /**
      * @param array<string|int, mixed> $params
-     * @param array<string, mixed> $types
+     * @param array<string|int, mixed> $types
      */
     public function __construct(
         private readonly string $sql,
