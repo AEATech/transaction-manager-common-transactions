@@ -65,6 +65,27 @@ All SQL dialect specifics are delegated to adapter packages.
 
 ------------------------------------------------------------------------
 
+## 🔧 Usage Example
+
+``` php
+use AEATech\TransactionManager\Transaction\InsertTransaction;
+use AEATech\TransactionManager\MySQL\IdentifierQuoter;
+use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
+
+$transaction = new InsertTransaction(
+    insertValuesBuilder: new InsertValuesBuilder(),
+    quoter: new IdentifierQuoter(),
+    tableName: 'users',
+    rows: [
+        ['name' => 'Alex', 'age' => 30],
+        ['name' => 'Bob',  'age' => 25],
+    ],
+    columnTypes: ['name' => \PDO::PARAM_STR, 'age' => \PDO::PARAM_INT],
+);
+```
+
+------------------------------------------------------------------------
+
 ## 🧪 Running Tests in Docker
 
 ### Start containers
@@ -119,6 +140,13 @@ for v in 8.2 8.3 8.4 ; do   echo "Testing PHP $v...";   docker-compose -p aeatec
 
 ------------------------------------------------------------------------
 
+## Run phpstan
+```bash
+docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml exec php-cli-8.4 vendor/bin/phpstan analyse -c phpstan.neon
+```
+
+------------------------------------------------------------------------
+
 ## 🧵 Attach interactive shells
 
 PHP 8.2:
@@ -137,27 +165,6 @@ PHP 8.4:
 
 ``` bash
 docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml exec php-cli-8.4 /bin/bash
-```
-
-------------------------------------------------------------------------
-
-## 🔧 Usage Example
-
-``` php
-use AEATech\TransactionManager\Transaction\InsertTransaction;
-use AEATech\TransactionManager\MySQL\IdentifierQuoter;
-use AEATech\TransactionManager\Transaction\Internal\InsertValuesBuilder;
-
-$transaction = new InsertTransaction(
-    insertValuesBuilder: new InsertValuesBuilder(),
-    quoter: new IdentifierQuoter(),
-    tableName: 'users',
-    rows: [
-        ['name' => 'Alex', 'age' => 30],
-        ['name' => 'Bob',  'age' => 25],
-    ],
-    columnTypes: ['name' => \PDO::PARAM_STR, 'age' => \PDO::PARAM_INT],
-);
 ```
 
 ------------------------------------------------------------------------

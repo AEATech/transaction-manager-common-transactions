@@ -12,6 +12,9 @@ class DeleteTransactionFactory
     ) {
     }
 
+    /**
+     * @param array<string|int, mixed> $identifiers
+     */
     public function factory(
         string $tableName,
         string $identifierColumn,

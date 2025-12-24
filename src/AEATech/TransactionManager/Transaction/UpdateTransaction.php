@@ -14,6 +14,11 @@ class UpdateTransaction implements TransactionInterface
     public const MESSAGE_COLUMNS_WITH_VALUES_FOR_UPDATE_MUST_NOT_BE_EMPTY
         = 'Columns with values for update must not be empty.';
 
+    /**
+     * @param array<string|int, mixed> $identifiers
+     * @param array<string, mixed> $columnsWithValuesForUpdate
+     * @param array<string, mixed> $columnTypes
+     */
     public function __construct(
         private readonly IdentifierQuoterInterface $quoter,
         private readonly string $tableName,

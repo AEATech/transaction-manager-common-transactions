@@ -12,6 +12,11 @@ class UpdateTransactionFactory
     ) {
     }
 
+    /**
+     * @param array<string|int, mixed> $identifiers
+     * @param array<string, mixed> $columnsWithValuesForUpdate
+     * @param array<string, mixed> $columnTypes
+     */
     public function factory(
         string $tableName,
         string $identifierColumn,

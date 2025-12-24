@@ -12,6 +12,9 @@ class DeleteTransaction implements TransactionInterface
 {
     public const MESSAGE_IDENTIFIERS_MUST_NOT_BE_EMPTY = 'Identifiers must not be empty.';
 
+    /**
+     * @param array<string|int, mixed> $identifiers
+     */
     public function __construct(
         private readonly IdentifierQuoterInterface $quoter,
         private readonly string $tableName,

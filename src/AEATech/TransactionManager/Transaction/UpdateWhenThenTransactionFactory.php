@@ -14,6 +14,11 @@ class UpdateWhenThenTransactionFactory
     ) {
     }
 
+    /**
+     * @param array<array<string, mixed>> $rows
+     * @param string[] $updateColumns
+     * @param array<string, mixed> $updateColumnTypes
+     */
     public function factory(
         string $tableName,
         array $rows,

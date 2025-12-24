@@ -9,6 +9,7 @@ class InsertValuesBuilder
 {
     /**
      * @param array<array<string,mixed>> $rows
+     *
      * @param array<string,int|string>   $columnTypes
      *
      * @return array{
@@ -28,7 +29,7 @@ class InsertValuesBuilder
 
         $firstRow = reset($rows);
 
-        if (false === is_array($firstRow) || [] === $firstRow) {
+        if (false === is_array($firstRow) || [] === $firstRow) { // @phpstan-ignore-line
             throw new InvalidArgumentException('Insert: first row must be a non-empty array.');
         }
 
@@ -41,7 +42,7 @@ class InsertValuesBuilder
         $paramIndex = 0;
 
         foreach ($rows as $rowIndex => $row) {
-            if (false === is_array($row)) {
+            if (false === is_array($row)) { // @phpstan-ignore-line
                 throw new InvalidArgumentException(sprintf(
                     'Insert: row %s must be an array, %s given',
                     $rowIndex,

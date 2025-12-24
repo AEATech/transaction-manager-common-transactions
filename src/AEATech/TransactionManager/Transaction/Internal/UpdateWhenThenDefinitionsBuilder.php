@@ -10,6 +10,15 @@ class UpdateWhenThenDefinitionsBuilder
     public const MESSAGE_ROWS_MUST_NOT_BE_EMPTY = 'Rows must not be empty.';
     public const MESSAGE_UPDATE_COLUMNS_MUST_NOT_BE_EMPTY = 'Update columns must not be empty.';
 
+    /**
+     * @param array<array<string, mixed>> $rows
+     * @param string[] $updateColumns
+     *
+     * @return array{
+     *     0: array<int|string|mixed>,
+     *     1: array<string, array<array{0: int|string|mixed, 1: mixed}>>
+     * }
+     */
     public function build(
         array $rows,
         string $identifierColumn,
@@ -27,7 +36,7 @@ class UpdateWhenThenDefinitionsBuilder
         $updateDefinitions = [];
 
         foreach ($rows as $index =>  $row) {
-            if (!is_array($row)) {
+            if (!is_array($row)) { // @phpstan-ignore-line
                 throw new InvalidArgumentException(self::buildMessageInvalidRowType($index, $row));
             }
 
@@ -41,7 +50,9 @@ class UpdateWhenThenDefinitionsBuilder
                 ));
             }
 
-            $identifiers[] = $row[$identifierColumn];
+            $identifier = $row[$identifierColumn];
+
+            $identifiers[] = $identifier;
 
             foreach ($updateColumns as $column) {
                 if (false === isset($row[$column]) && false === array_key_exists($column, $row)) {
@@ -51,10 +62,7 @@ class UpdateWhenThenDefinitionsBuilder
                     ));
                 }
 
-                $updateDefinitions[$column][] = [
-                    $row[$identifierColumn],
-                    $row[$column],
-                ];
+                $updateDefinitions[$column][] = [$identifier, $row[$column]];
             }
         }
 

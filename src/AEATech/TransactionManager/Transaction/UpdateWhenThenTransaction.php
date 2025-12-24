@@ -10,6 +10,11 @@ use AEATech\TransactionManager\TransactionInterface;
 
 class UpdateWhenThenTransaction implements TransactionInterface
 {
+    /**
+     * @param array<array<string, mixed>> $rows
+     * @param string[] $updateColumns
+     * @param array<string, mixed> $updateColumnTypes
+     */
     public function __construct(
         private readonly UpdateWhenThenDefinitionsBuilder $definitionsBuilder,
         private readonly IdentifierQuoterInterface $quoter,

@@ -14,6 +14,10 @@ class InsertTransactionFactory
     ) {
     }
 
+    /**
+     * @param array<array<string, mixed>> $rows
+     * @param array<string, int|string> $columnTypes Doctrine/DBAL type or PDO::PARAM_*
+     */
     public function factory(
         string $tableName,
         array $rows,
