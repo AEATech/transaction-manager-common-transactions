@@ -48,7 +48,7 @@ class InsertValuesBuilderTest extends TestCase
     {
         $rows = [
             ['a' => 'A1', 'b' => 'B1', 'c' => 'C1'],
-            // different order in second row should not affect placeholders order
+            // different order in the second row should not affect placeholders order
             ['c' => 'C2', 'a' => 'A2', 'b' => 'B2'],
         ];
 
