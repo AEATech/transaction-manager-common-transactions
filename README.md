@@ -136,10 +136,12 @@ docker-compose -p aeatech-transaction-manager-common-transactions -f docker/dock
 
 ## 🔄 Run all configured PHP variants
 
-``` bash
-for v in 8.2 8.3 8.4 ; do   echo "Testing PHP $v...";   docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml exec php-cli-$v vendor/bin/phpunit || break; done
+```bash
+for v in 8.2 8.3 8.4 ; do \
+  echo "Testing PHP $v..."; \
+  docker-compose -p aeatech-transaction-manager-common-transactions -f docker/docker-compose.yml exec -T php-cli-$v vendor/bin/phpunit || break; \
+done
 ```
-
 ------------------------------------------------------------------------
 
 ## Run phpstan
