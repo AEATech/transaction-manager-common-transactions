@@ -10,13 +10,13 @@ class InsertValuesBuilder
     /**
      * @param array<array<string,mixed>> $rows
      *
-     * @param array<string,int|string>   $columnTypes
+     * @param array<string|int, mixed> $columnTypes
      *
      * @return array{
-     *     0: string,                  // VALUES (...), (...), ...
-     *     1: array<int,mixed>,        // params
-     *     2: array<int,int|string>,   // types
-     *     3: array<int,string>        // columns
+     *     0: string,           // VALUES (...), (...), ...
+     *     1: array<int,mixed>, // params
+     *     2: array<int,mixed>, // types
+     *     3: array<int,string> // columns
      * }
      *
      * @throws InvalidArgumentException
@@ -65,7 +65,7 @@ class InsertValuesBuilder
                 $params[] = $row[$column];
 
                 // If a type is defined for this column, use it.
-                // If a type is not defined — do not write to $types,
+                // If a type is not defined — do not write to $types;
                 // Doctrine will bind the parameter as ParameterType::STRING.
                 if (isset($columnTypes[$column])) {
                     $types[$paramIndex] = $columnTypes[$column];
