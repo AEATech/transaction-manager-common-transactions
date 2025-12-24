@@ -13,6 +13,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use PDO;
+use Throwable;
 
 #[CoversClass(UpdateTransaction::class)]
 class UpdateTransactionTest extends TestCase
@@ -42,6 +43,11 @@ class UpdateTransactionTest extends TestCase
           'SET `' . self::COLUMN_1 . '` = ?, `' . self::COLUMN_2 . '` = ? ' .
           'WHERE `' . self::IDENTIFIER_COLUMN . '` IN (?, ?, ?)';
 
+    /**
+     * @param array<string, int> $columnTypes
+     *
+     * @throws Throwable
+     */
     #[Test]
     #[DataProvider('buildDataProvider')]
     public function build(array $columnTypes): void
@@ -140,6 +146,11 @@ class UpdateTransactionTest extends TestCase
         $transaction->build();
     }
 
+    /**
+     * @param array<int> $identifiers
+     * @param array<string, mixed> $columnsWithValuesForUpdate
+     * @param array<string, int> $columnTypes
+     */
     private static function createTransaction(
         array $identifiers = self::IDENTIFIERS,
         array $columnsWithValuesForUpdate = self::COLUMNS_WITH_VALUES_FOR_UPDATE,

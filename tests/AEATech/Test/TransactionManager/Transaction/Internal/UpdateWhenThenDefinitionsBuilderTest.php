@@ -122,12 +122,16 @@ class UpdateWhenThenDefinitionsBuilderTest extends TestCase
         ];
 
         $this->builder->build(
-            $rows,
+            $rows, //@phpstan-ignore-line
             self::IDENTIFIER_COLUMN,
             self::UPDATE_COLUMNS
         );
     }
 
+    /**
+     * @param array<int, array<string, mixed>> $rows
+     * @param string $message
+     */
     #[Test]
     #[DataProvider('buildMessageMissingColumnValueDataProvider')]
     public function buildFailedWithMissingColumnValue(array $rows, string $message): void

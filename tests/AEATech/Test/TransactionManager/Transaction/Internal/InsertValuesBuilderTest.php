@@ -86,7 +86,7 @@ class InsertValuesBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('row 1 must be an array, string given');
         /** @noinspection PhpParamsInspection */
-        (new InsertValuesBuilder())->build($rows, []);
+        (new InsertValuesBuilder())->build($rows, []); //@phpstan-ignore-line
     }
 
     #[Test]
@@ -112,6 +112,6 @@ class InsertValuesBuilderTest extends TestCase
         $this->expectExceptionMessage('first row must be a non-empty array');
 
         /** @noinspection PhpParamsInspection */
-        (new InsertValuesBuilder())->build([123], []);
+        (new InsertValuesBuilder())->build([123], []); //@phpstan-ignore-line
     }
 }

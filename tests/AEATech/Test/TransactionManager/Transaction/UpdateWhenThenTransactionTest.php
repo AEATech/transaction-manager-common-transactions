@@ -16,6 +16,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use PDO;
+use Throwable;
 
 #[CoversClass(UpdateWhenThenTransaction::class)]
 class UpdateWhenThenTransactionTest extends TestCase
@@ -112,6 +113,11 @@ class UpdateWhenThenTransactionTest extends TestCase
         $this->quoter = self::buildIdentifierQuoter();
     }
 
+    /**
+     * @param array<string, int> $updateColumnTypes
+     *
+     * @throws Throwable
+     */
     #[Test]
     #[DataProvider('buildDataProvider')]
     public function build(array $updateColumnTypes): void
@@ -199,6 +205,9 @@ class UpdateWhenThenTransactionTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<string, int> $updateColumnTypes
+     */
     private function createTransaction(
         array $updateColumnTypes = self::UPDATE_COLUMN_TYPES,
         bool $isIdempotent = self::IS_IDEMPOTENT,
