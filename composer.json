@@ -1,7 +1,7 @@
 {
     "name": "aeatech/transaction-manager-common-transactions",
     "description": "Contains reusable, dialect-independent SQL transaction implementations, identifier quoting abstraction, and shared builders used across MySQL, PostgreSQL, and future AEATech Transaction Manager adapters",
-    "keywords": ["transaction-manager", "transaction", "database", "MySQL", "PostgreSQL"],
+    "keywords": ["aeatech", "transaction-manager", "transaction", "database", "MySQL", "PostgreSQL"],
     "license": "MIT",
     "type": "library",
     "config": {
@@ -21,6 +21,7 @@
     "require-dev": {
         "mockery/mockery": "^1.6.10",
         "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-mockery": "^2.0",
         "phpunit/phpunit": "^11.5",
         "roave/security-advisories": "dev-master"
     },
