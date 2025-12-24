@@ -1,5 +1,7 @@
 # AEATech Transaction Manager --- Common SQL Transactions
 
+![Code Coverage](.build/coverage_badge.svg)
+
 This package contains **dialect-agnostic SQL transaction
 implementations** shared across different database adapters of the
 AEATech Transaction Manager ecosystem.
